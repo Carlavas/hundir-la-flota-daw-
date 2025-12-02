@@ -28,15 +28,41 @@ function crearTablero(){
             //A cada celda le aÃ±adimos su propio id (coord)
             celda.id = `celda-${fila}-${col}`;
 
-            //AÃ±adimos el evento de click para los disparos
+            //Añadimos el evento de click para los disparos
             celda.addEventListener('click', disparar);
 
-            //AÃ±adimos la celda al tablero
+            //Añadimos la celda al tablero
             tablero.appendChild(celda);
         }
     }
 }
-
+function mostrarMensaje(tipo, nombreBarco = '') {
+    const mensajeDiv = document.getElementById('mensajeDisparo');
+    
+    // Limpiamos clases anteriores
+    mensajeDiv.className = 'resultadoDisparo';
+    
+    // Añadimos la clase según el tipo
+    mensajeDiv.classList.add(tipo);
+    
+    // Definimos el mensaje
+    let texto = '';
+    if (tipo === 'agua') {
+        texto = '¡AGUA!';
+    } else if (tipo === 'tocado') {
+        texto = `¡TOCADO! ${nombreBarco}`;
+    } else if (tipo === 'hundido') {
+        texto = `¡HUNDIDO! ${nombreBarco}`;
+    }
+    
+    mensajeDiv.textContent = texto;
+    
+    // Limpiamos el mensaje después de 2 segundos
+    setTimeout(() => {
+        mensajeDiv.textContent = '';
+        mensajeDiv.className = 'resultadoDisparo';
+    }, 2000);
+}
 function disparar(e){
 const celda = e.target;
 
@@ -45,8 +71,8 @@ if(celda.classList.contains('disparado')){ //Si ya estÃ¡ coloreada no hacemos 
     return;
 }
 
-document.getElementById('contadorDisparos').innerText = disparosTotales;
 disparosTotales++;
+document.getElementById('contadorDisparos').innerText = disparosTotales;
 
 //Obtenemos las cordenadas del click, en texto y lo convertimos a n
 const filaClick = parseInt(celda.dataset.fila);
@@ -68,10 +94,12 @@ for(let barco of flotaEnemiga){
             dadoEnElBlanco = true; 
             //AÃ±adimos uno al contador de daÃ±os (vida del barco)
             barco.aciertos++;
+            mostrarMensaje('tocado', barco.nombre); 
 
             //Comprobamos si estÃ¡ hundido
             if(barco.aciertos>=barco.tamanyo){
                 console.log("El barco" + barco.nombre + "ha sido Â¡HUNDIDO!");
+                mostrarMensaje('hundido', barco.nombre); 
                 for(let coordHundido of barco.coordenadas){
                     //Buscamos el div real en el HTML usando el id Ãºnico
                     let idCelda = `celda-${coordHundido.fila}-${coordHundido.col}`;
@@ -100,8 +128,9 @@ for(let barco of flotaEnemiga){
     if(dadoEnElBlanco) break;
 }
 if(!dadoEnElBlanco){
-    console.log("Â¡Agua!");
+    console.log("¡Agua!");
     celda.style.backgroundColor='gray';
+     mostrarMensaje('agua'); 
 }
 
 celda.classList.add('disparado'); //Marcamos la celda como disparada para no repetirla
