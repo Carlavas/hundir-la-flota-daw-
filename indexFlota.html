@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hundir la Flota</title>
+    <link rel="stylesheet" href="estiloFlota.css">
+</head>
+<body>
+
+    <main>
+        <div class="panelInf">
+            <section class="infFlota">
+                <h2 class="titulos">
+                    Flota Enemiga
+                </h2>
+
+                <div id="listaBarcos" class="listaContenedora">
+                </div>
+
+                <br><div class="sinFondo">
+                    <p class="datosPanelInf">Disparos: <span id="contadorDisparos" class="nDisparos">0</span></p>
+                </div>
+            </section>
+
+            <section class="panelPuntuaciones">
+                <h2 class="titulos">Mejores Puntuaciones</h2>
+                <div class="sinFondo">
+                    <ol id="listaPuntuaciones" class="datosPanelInf">
+                        <li></li>
+                    </ol>
+            </section>
+        </div>
+
+        <div class="muestraJuego">
+            <div class="tituloJuego">
+                <h1 id="tituloPrincipal">Hundir la Flota</h1>
+            </div>
+            <div class="resultadoDisparo"></div>
+            <div id="tableroJuego">
+
+            </div>
+        </div>
+    </main>
+
+    <div id="modalVictoria" class="modal">
+        <div class="modalContenido">
+            <h2>Â¡Victoria!</h2>
+            <p>Has hundido la flota enemiga.</p>
+            <p>Disparos totales: <strong id="puntuacionFinal">0</strong></p>
+            
+            <form id="formGuardarPuntos">
+                <input type="text" id="nombreJugador" placeholder="Introduce tu nombre" required>
+                <button type="submit">Guardar PuntuaciÃ³n</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="scriptFlota.js"></script>
+</body>
+</html>

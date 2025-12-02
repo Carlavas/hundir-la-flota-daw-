@@ -1,0 +1,246 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    background-color: #12385a; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    width:80%;
+    height: 80%;
+    display: flex;
+    gap: 20px;
+    background:#72b2ea;
+    padding: 20px;
+    border-radius:20px;
+    box-shadow: 0 0 30px 10px #3770a2;
+}
+
+.panelInf{
+    height: 100%;
+    width: 30%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+}
+
+
+/* Estilo para los items de la lista de barcos */
+.barco-item {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #e3f2fd;
+    border-radius: 4px;
+    border-left: 5px solid #12385a;
+    font-weight: bold;
+    color: #12385a;
+    transition: all 0.3s;
+}
+
+/* Estilo para cuando el barco está hundido */
+.barco-item.tachado {
+    text-decoration: line-through;
+    background-color: #ffcdd2; 
+    border-left-color: #b71c1c;
+    color: #b71c1c;
+    opacity: 0.7;
+}
+
+
+
+.muestraJuego{
+    height:100%;
+    width:68%;
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:1em;
+}
+
+
+#tableroJuego{
+    height:75%;
+    aspect-ratio: 1 / 1; 
+    display:grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    padding: 3px;
+    gap:3px;
+    border-radius:5px;
+    background-color:#3770a2;
+    box-shadow: 0 0 5px 5px #19334a;
+}
+
+.casilla{
+    border-radius:5px;
+    background-color: #98cbf0; 
+    border: 2px solid #0b2943; 
+    cursor: pointer; /* Para saber que se puede hacer clic */
+}
+
+.casilla:hover {
+    background-color: #b3e5fc; 
+    transform: scale(1.05); /* OPCIONAL: Hace que la casilla crezca un pelín */
+    border-color: #fff; 
+    z-index: 1; /* Para que si crece, se ponga por encima de las otras */
+}
+
+
+/* Mostraremos cuando se hayan hundido los barcos */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Flotante sobre todo lo demás */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente oscuro */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Siempre encima */
+}
+
+/* CLASE PARA MOSTRARLO */
+.modal.activo {
+    display: flex;
+}
+
+.modalContenido {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.modal input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal button {
+    padding: 10px 20px;
+    background-color: #12385a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.titulos{
+    color: #12385a; 
+    text-transform: uppercase; 
+    font-size: 1.2rem;
+    font-weight: 800; 
+    border-bottom: 3px solid #12385a; 
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+#tituloPrincipal{
+    color: white;
+    text-shadow: 2px 2px 0px #12385a;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.infFlota, .panelPuntuaciones{
+    background-color:rgba(255, 255, 255, 0.3);
+    padding:15px;
+    border-radius: 10px;
+    margin-bottom:20px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.datosPanelInf{
+    font-weight: bold;
+    color: #0b2943;
+    font-size: 1rem;
+}
+
+
+.nDisparos {
+    font-size: 1.4rem;
+    color: #d32f2f;
+    background: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+
+#listaPuntuaciones {
+    padding-left: 20px; 
+}
+
+#listaPuntuaciones li {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #12385a;
+    border-bottom: 1px solid rgba(255,255,255,0.4); 
+    padding-bottom: 2px;
+}
+
+
+#listaPuntuaciones li:first-child {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 0 #000;
+}
+
+
+/* Contenedor de la lista para que no se desborde si hay muchos */
+.listaContenedora {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+}
+
+.barcoItem {
+    background-color: #f0f8ff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border-left: 6px solid #12385a; 
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+
+.barcoItem:hover {
+    transform: translateX(5px); /* Se mueve a la derecha */
+}
+
+/* ESTADO TACHADO (HUNDIDO) */
+.barcoItem.tachado {
+    background-color: #ffcdd2; 
+    border-left-color: #c62828; 
+    color: #c62828;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
